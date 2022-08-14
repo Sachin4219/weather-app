@@ -6,10 +6,9 @@ var wind    = document.querySelector(".wind");
 var clouds  = document.querySelector(".clouds");
 var temp    = document.querySelector(".temp");
 var weatherIcon    = document.querySelector(".logo");
-
 var lat;
 var long;
-
+let message;
 function getData(){
 fetch("https://api.openweathermap.org/data/2.5/weather?q=" + input.value + "&appid=d051b119410eccb47463b12e9f73cf47")
 	.then(response => response.json())
@@ -20,10 +19,10 @@ fetch("https://api.openweathermap.org/data/2.5/weather?q=" + input.value + "&app
 		var {icon, description} = data.weather[0];
 		var cloudCover = data.clouds;
 		var name = data.name;
-		if(lat==null){
+		
 			lat = data.coord.lat;
 			long = data.coord.lon;
-		}
+		message = data.message;
 
 		temp.innerText = Math.round(temperatue - 273.15) + " °C";
 		clouds.innerText = cloudCover.all.toString() + "%";
@@ -42,7 +41,7 @@ fetch("https://api.openweathermap.org/data/2.5/weather?q=" + input.value + "&app
 
 	})
 
-	.catch(err => alert("wrong city name!"))
+	.catch(err => console.log(err) 	)
 
 }
 
@@ -72,7 +71,5 @@ input.addEventListener("keydown", (event) => {
 
 
 btn.addEventListener("click", getData);
-
-
 
 
