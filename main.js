@@ -26,3 +26,27 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
+
+if ("Notification" in window) {
+  window.addEventListener("load", () => {
+    // Check if permission has already been granted
+    if (Notification.permission === "granted") {
+      console.log("Notification permission already granted.");
+    } else if (Notification.permission !== "denied") {
+      // Request permission if not denied
+      Notification.requestPermission()
+        .then((permission) => {
+          if (permission === "granted") {
+            console.log("Notification permission granted.");
+          } else {
+            console.error("Notification permission denied.");
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to request notification permission:", err);
+        });
+    }
+  });
+} else {
+  console.error("Notifications are not supported in this browser.");
+}
