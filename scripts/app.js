@@ -13,7 +13,7 @@ const uri = "https://api.openweathermap.org/data/2.5/weather?q=";
 const appid = "d051b119410eccb47463b12e9f73cf47";
 // let frame = document.getElementsByTagName("iframe")[0];
 
-function getData() {
+function checkWeather() {
   fetch(`${uri}${input.value}&appid=${appid}`)
     .then((response) => response.json())
     .then((data) => {
@@ -99,10 +99,10 @@ input.addEventListener("keydown", (event) => {
           cityname.innerText = weatherData.cityName;
           weatherIcon.src = weatherData.weatherIcon;
         } else {
-          getData();
+          checkWeather();
         }
       } else {
-        getData();
+        checkWeather();
       }
     } catch (err) {
       console.log(err);
@@ -110,4 +110,4 @@ input.addEventListener("keydown", (event) => {
   }
 });
 
-btn.addEventListener("click", getData);
+btn.addEventListener("click", checkWeather);
