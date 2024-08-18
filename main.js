@@ -7,18 +7,17 @@ if ("serviceWorker" in navigator) {
           "Service Worker registered with scope:",
           registration.scope
         );
-
-        if ("periodicSync" in registration) {
+      })
+      .then(() => {
+        if ("PeriodicSyncManager" in window) {
           registration.periodicSync
             .register("check-weather", {
-              minInterval: 30 * 1000, // 24 hours
+              minInterval: 10 * 1000, // 24 hours in milliseconds
             })
-            .then(() => {
-              console.log("Periodic Sync registered");
-            })
-            .catch((err) => {
-              console.error("Periodic Sync registration failed:", err);
-            });
+            .then(() => console.log("Periodic Sync registered"))
+            .catch((err) =>
+              console.error("Periodic Sync registration failed:", err)
+            );
         }
       })
       .catch((error) => {
