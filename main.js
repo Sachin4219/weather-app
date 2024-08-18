@@ -1,14 +1,12 @@
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/service-worker.js", { scope: "/" })
+      .register("/service-worker.js")
       .then((registration) => {
         console.log(
           "Service Worker registered with scope:",
           registration.scope
         );
-      })
-      .then(() => {
         if ("PeriodicSyncManager" in window) {
           registration.periodicSync
             .register("check-weather", {
