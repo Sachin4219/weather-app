@@ -1,8 +1,6 @@
 self.addEventListener("sync", (event) => {
-  console.log("sync event");
-  if (event.tag === "check-weather") {
-    event.waitUntil(checkCloudCover());
-  }
+  console.log("Sync event received");
+  event.waitUntil(checkCloudCover());
 });
 
 async function checkCloudCover() {
