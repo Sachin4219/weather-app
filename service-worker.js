@@ -3,6 +3,11 @@ self.addEventListener("sync", (event) => {
   event.waitUntil(checkCloudCover());
 });
 
+self.addEventListener("periodicsync", (event) => {
+  console.log("Sync event received");
+  event.waitUntil(checkCloudCover());
+});
+
 async function checkCloudCover() {
   const uri = "https://api.openweathermap.org/data/2.5/weather?q=";
   const appid = "d051b119410eccb47463b12e9f73cf47";
@@ -15,7 +20,7 @@ async function checkCloudCover() {
     const cloudCover = data.clouds.all; // Example field for cloud cover
     console.log(cloudCover);
 
-    if (cloudCover > 60) {
+    if (cloudCover > 30) {
       self.registration.showNotification("Weather Alert", {
         body: `Cloud cover at ${place} is higher than 60%`,
         icon: "../assets/icons/icon512x512.png",
